@@ -89,6 +89,6 @@ require:
 
 ## Feedback
 
-I built this plugin for personal use. I am writing a headless them using [Relay Modern](https://facebook.github.io/relay/docs/relay-modern.html). If you find bugs (you will), and want to let me know:  
+I built this plugin for personal use. I am writing a headless theme using [Relay Modern](https://facebook.github.io/relay/docs/relay-modern.html). If you find bugs (you will), and want to let me know:  
 * File a GitHub Issue [above](https://github.com/staylor/wp-graphql-middleware/issues/new)
 * @ me on [Twitter](https://twitter.com/wonderboymusic).
