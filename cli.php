@@ -146,7 +146,7 @@ class Commands extends \WP_CLI_Command
 
     // @codingStandardsIgnoreLine
     public function __oembed_dataparse( $html, $response, $url ) {
-        remove_filter( 'embed_oembed_html', [ $this, __FUNCTION__ ] );
+        remove_filter( 'oembed_dataparse', [ $this, __FUNCTION__ ] );
 
         if (0 === strpos( $html, '<figure' )) {
             \WP_CLI::line(
@@ -207,7 +207,7 @@ class Commands extends \WP_CLI_Command
         \WP_CLI::line( 'Regenerating unknown oembed data...' );
 
         $sql = "SELECT DISTINCT post_id FROM $wpdb->postmeta WHERE meta_value = '{{unknown}}' " .
-          " AND meta_key LIKE '_oembed_%'";
+            " AND meta_key LIKE '_oembed_%'";
         $ids = $wpdb->get_col( $sql );
 
         $this->parseIDs( $ids );

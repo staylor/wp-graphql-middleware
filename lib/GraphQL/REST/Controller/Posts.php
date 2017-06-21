@@ -25,8 +25,8 @@ class Posts extends \WP_REST_Posts_Controller
         if ('view' === $request['context']) {
             $data['content']['raw'] = $this->decode_text( $data['content']['rendered'] );
             $data['excerpt']['raw'] = empty( $post->post_excerpt ) ?
-              $this->decode_text( $data['excerpt']['rendered'] ) :
-              $post->post_excerpt;
+                $this->decode_text( $data['excerpt']['rendered'] ) :
+                $post->post_excerpt;
         }
 
         $response->set_data( $data );

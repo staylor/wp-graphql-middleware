@@ -101,7 +101,7 @@ class NavMenus extends \WP_REST_Controller
             ];
             $items[] = $item;
         }
-        $nav_menu['items' ] = $items;
+        $nav_menu['items'] = $items;
 
         return $nav_menu;
     }
