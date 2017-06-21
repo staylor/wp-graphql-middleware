@@ -57,7 +57,7 @@ There are 2 readonly routes:
 ### `graphql/v1/taxonomies`
 
 Returns a `labels` property for each type, containing 2 nodes: `singular` and `plural`, so display names can be used where appropriate.
-Returns a property, `rewrite`, that contains 1 node: `slug`, which is a hint that can be used on the frontend to construct routes. This helps avoid having to write a translation layer for Taxonomy Name -> Pretty Name. Think: `post_tag` and `tag`. This is easiest way to know what is happening. By doing this, I was able to create a `Term` route, that supports all taxonomies. Not a requirement, but easier to do when you know what the URLs might look like when building.
+Returns a property, `rewrite`, that contains 1 node: `slug`, which is a hint that can be used on the frontend to construct routes. This helps avoid having to write a translation layer for Taxonomy Name -> Pretty Name. Think: `post_tag` and `tag`. This is the easiest way to know what is happening. By doing this, I was able to create a `Term` route, that supports all taxonomies. Not a requirement, but easier to do when you know what the URLs might look like when building.
 
 ## oEmbed Extensions
 
