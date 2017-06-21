@@ -7,7 +7,7 @@ This code is still in active development. Clone this repo in your `wp-content/pl
 
 ## REST API Extensions
 
-This plugin extends the existing WordPress REST API to provide more data than is currently available. However, instead of filtering the current endpoints, news endpoint are provided that extend the existing endpoints. This ensures that the core endpoints work exactly as you expect.
+This plugin extends the existing WordPress REST API to provide more data than is currently available. However, instead of filtering the current endpoints, new endpoint are provided that extend the existing endpoints. This ensures that the core endpoints work exactly as you expect.
 
 Most of these endpoints remove the `_links` property, which is a JSON Schema construct not embraced by GraphQL.
 
