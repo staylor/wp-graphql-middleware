@@ -107,7 +107,7 @@ class NavMenus extends \WP_REST_Controller
     }
 
     // @codingStandardsIgnoreLine
-    public function get_items( $request) {
+    public function get_items( $request ) {
         $data = [];
         $menus = wp_get_nav_menus();
 
@@ -128,7 +128,7 @@ class NavMenus extends \WP_REST_Controller
     }
 
     // @codingStandardsIgnoreLine
-    public function get_item_permissions_check( $request) {
+    public function get_item_permissions_check( $request ) {
         if ('edit' === $request['context'] && ! current_user_can( 'edit_theme_options' )) {
             return new WP_Error(
                 'rest_forbidden_context',
@@ -140,7 +140,7 @@ class NavMenus extends \WP_REST_Controller
     }
 
     // @codingStandardsIgnoreLine
-    public function get_item( $request) {
+    public function get_item( $request ) {
         $menu = wp_get_nav_menu_object( $request['menu'] );
         $nav_menu = $this->hydrate_menu( $menu );
 
@@ -153,7 +153,7 @@ class NavMenus extends \WP_REST_Controller
     }
 
     // @codingStandardsIgnoreLine
-    public function prepare_item_for_response( $nav_menu, $request) {
+    public function prepare_item_for_response( $nav_menu, $request ) {
         $context = ! empty( $request['context'] ) ? $request['context'] : 'view';
         $data = $this->add_additional_fields_to_object( $nav_menu, $request );
         $data = $this->filter_response_by_context( $data, $context );

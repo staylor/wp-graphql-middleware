@@ -11,6 +11,6 @@ class Settings extends \WP_REST_Settings_Controller
 
     // @codingStandardsIgnoreLine
     public function get_item_permissions_check($request) {
-        return true;
+        return \WP_REST_Server::READABLE === $request->get_method();
     }
 }

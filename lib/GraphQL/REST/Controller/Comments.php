@@ -34,8 +34,8 @@ class Comments extends \WP_REST_Comments_Controller
         $response->set_data( $data );
 
         if (! $comment->author &&
-            'POST' === $request->get_method() &&
-            '/comments' === substr( $request->get_route(), -9 )) {
+            \WP_REST_Server::CREATABLE === $request->get_method() &&
+            $this->rest_base === substr( $request->get_route(), -8 )) {
             $comment_cookie_lifetime = apply_filters( 'comment_cookie_lifetime', 30000 );
             $format = '%s=%s; Path=/; Max-Age=' . $comment_cookie_lifetime . ';';
 
