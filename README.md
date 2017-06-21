@@ -61,7 +61,7 @@ Returns a property, `rewrite`, that contains 1 node: `slug`, which is a hint tha
 
 ## oEmbed Extensions
 
-When building a media-heavy site, you might end up with a bunch of 3rd-party embeds everywhere. They seem innocuous in the database - usually just a URL on its on line. Where this can go off the rails is when you build a Single Page App™ using something like React, and you are simply dumping your content onto the page via `<Component dangerouslySetInnerHTML={{ __html: theInternet }} />`. What tends to happen: your Chrome console lights up like a Christmas tree, multiple iframes start going nuts, rendering is slowed... and your user clicks on nothing.
+When building a media-heavy site, you might end up with a bunch of 3rd-party embeds everywhere. They seem innocuous in the database - usually just a URL on its own line. Where this can go off the rails is when you build a Single Page App™ using something like React, and you are simply dumping your content onto the page via `<Component dangerouslySetInnerHTML={{ __html: theInternet }} />`. What tends to happen: your Chrome console lights up like a Christmas tree, multiple iframes start going nuts, rendering is slowed... and your user clicks on nothing.
 
 Would it not be better to show a Preview of the embed and then activate it when clicked? Would it not be better to have semantic markup in your content that gives you enough information to do what you need with the media, regardless of theme? A filter on `oembed_dataparse` has been provided to format your media like so:
 
