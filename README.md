@@ -79,7 +79,7 @@ Tucked away in here are 2 WP-CLI commands:
 * `wp graphql oembed regenerate` - attempts to refetch all of you oEmbed-able URL data and replace the cached HTML output with the format described above.
 * `wp graphql oembed unknown` - attempts to re-try fetching all oEmbed responses that bombed-out the first time. It is possible that this command will need to be run multiple times.
 
-These commands are not turned on by default, as their are still in active development, experimental, Alpha™ code. If you want to use them, you can load them in your `wp-cli.yml`:
+These commands are not turned on by default, as they are still in active development, experimental, Alpha™ code. If you want to use them, you can load them in your `wp-cli.yml`:
 
 ```YAML
 require:
