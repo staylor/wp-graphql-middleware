@@ -84,7 +84,7 @@ These commands are not turned on by default, as they are still in active develop
 
 ```YAML
 require:
-  - wp-content/plugins/wp-graphql-middleware/lib/functions.php
+  - wp-content/plugins/wp-graphql-middleware/vendor/autoload.php
   - wp-content/plugins/wp-graphql-middleware/cli.php
 ```
 
