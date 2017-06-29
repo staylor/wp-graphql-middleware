@@ -73,13 +73,36 @@ class Comments extends \WP_REST_Comments_Controller
 
     // Anonymous users can edit their comments for 24 hours if they have this cookie
     // @codingStandardsIgnoreLine
-    public function check_edit_permission($comment) {
-        $cookie = \GraphQL\getCommentEditTokenKey($comment);
-        if (empty($_COOKIE[$cookie])) {
+    public function checkToken($token, $comment) {
+        $value = \GraphQL\getCommentEditTokenValue($comment);
+        return $token === $value;
+    }
+
+    // @codingStandardsIgnoreLine
+    public function update_item_permissions_check($request) {
+        $check = parent::update_item_permissions_check($request);
+        if (true === $check) {
+            return $check;
+        }
+        $comment = $this->get_comment($request['id']);
+        $token = $request['token'];
+        if (!$token) {
             return false;
         }
-        $value = \GraphQL\getCommentEditTokenValue($comment);
-        // stripslashes because WordPress
-        return stripslashes($_COOKIE[$cookie]) === $value;
+        return $this->checkToken($token, $comment);
+    }
+
+    // @codingStandardsIgnoreLine
+    public function delete_item_permissions_check($request) {
+        $check = parent::delete_item_permissions_check($request);
+        if (true === $check) {
+            return $check;
+        }
+        $comment = $this->get_comment($request['id']);
+        $token = $request['token'];
+        if (!$token) {
+            return false;
+        }
+        return $this->checkToken($token, $comment);
     }
 }
