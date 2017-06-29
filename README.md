@@ -1,4 +1,4 @@
-# wp-graphql-middleware
+# WordPress GraphQL Middleware
 Extend the WordPress API with data to build headless themes with Relay and GraphQL.
 
 ## Installation
@@ -17,10 +17,10 @@ In v1 of the JSON API, or whatever it used to be called, you could pass arbitrar
 
 ### `graphql/v1/comments`
 
-This endpoint exists primarily to aid in creating a robust commenting UI for your app. The Comments endpoints in the REST API require authentication for most CRUD operations, but this plugin adds a filter to allow anonymous comment creation via the REST API. 
+This endpoint exists primarily to aid in creating a robust commenting UI for your app. The Comments endpoints in the REST API require authentication for most CRUD operations, but this plugin adds a filter to allow anonymous comment creation via the REST API.
 
 `prepare_item_for_response()` has been extended to:
-* add `Set-Cookie` headers to the response, so you can identify your users on the front end. 
+* add `Set-Cookie` headers to the response, so you can identify your users on the front end.
 * provide the `raw` value alongside the `rendered` value for comments to allow quick access for editing - TODO: actual edits and authentication do not work yet.
 * provide a `author_hash` value for each comment, to determine if the current user "owns" any of the anonymous comments - TODO: still determining an "auth" flow for safely allowing an "anonymous" user to edit or delete their comments.
 
@@ -76,8 +76,9 @@ Would it not be better to show a Preview of the embed and then activate it when 
 
 Tucked away in here are 2 WP-CLI commands:
 
-* `wp graphql oembed regenerate` - attempts to refetch all of you oEmbed-able URL data and replace the cached HTML output with the format described above.
-* `wp graphql oembed unknown` - attempts to re-try fetching all oEmbed responses that bombed-out the first time. It is possible that this command will need to be run multiple times.
+* `wp oembed regenerate` - attempts to refetch all of your oEmbed-able URL data and replace the cached HTML output with the format described above.
+* `wp oembed regenerate <ID>` - attempts to refetch all of the oEmbed-able URL data from a single post and replace the cached HTML output with the format described above.
+* `wp oembed unknown` - attempts to re-try fetching all oEmbed responses that bombed-out the first time. It is possible that this command will need to be run multiple times.
 
 These commands are not turned on by default, as they are still in active development, experimental, Alpha™ code. If you want to use them, you can load them in your `wp-cli.yml`:
 

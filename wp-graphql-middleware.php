@@ -7,17 +7,7 @@ Version: 0.0.1
 Author: Scott Taylor
 Author URI: http://highforthis.com
 */
-$dir = __DIR__ . '/lib/GraphQL/REST/Controller';
-
-require_once $dir . '/Comments.php';
-require_once $dir . '/Sidebars.php';
-require_once $dir . '/NavMenus.php';
-require_once $dir . '/Taxonomies.php';
-require_once $dir . '/PostTypes.php';
-require_once $dir . '/Settings.php';
-require_once $dir . '/Posts.php';
-require_once __DIR__ . '/lib/functions.php';
-require_once __DIR__ . '/lib/rest-api.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 // this catches regeneration
 add_filter( 'oembed_dataparse', '\GraphQL\oembed_dataparse', 10, 3 );
