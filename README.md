@@ -21,8 +21,8 @@ This endpoint exists primarily to aid in creating a robust commenting UI for you
 
 `prepare_item_for_response()` has been extended to:
 * add `Set-Cookie` headers to the response, so you can identify your users on the front end.
-* provide the `raw` value alongside the `rendered` value for comments to allow quick access for editing - TODO: actual edits and authentication do not work yet.
-* provide a `author_hash` value for each comment, to determine if the current user "owns" any of the anonymous comments - TODO: still determining an "auth" flow for safely allowing an "anonymous" user to edit or delete their comments.
+* provide the `raw` value alongside the `rendered` value for comments to allow quick access for editing.
+* provide a `author_hash` value for each comment, to determine if the current user "owns" any of the anonymous comments.
 
 ### `graphql/v1/nav-menus`
 

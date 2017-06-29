@@ -22,12 +22,9 @@ class Comments extends \WP_REST_Comments_Controller
         $response->remove_link('children');
 
         $data = $response->get_data();
-        $value = $comment->comment_author .
-            $comment->comment_author_email .
-            $comment->comment_author_url;
 
-        $owner = $value ? base64_encode($value) : '';
-        $data['author_hash'] = $owner;
+        $authorHash = \GraphQL\getAuthorHash($comment);
+        $data['author_hash'] = $authorHash;
         if ('view' === $request['context']) {
             $data['content']['raw'] = $comment->comment_content;
         }
@@ -36,32 +33,53 @@ class Comments extends \WP_REST_Comments_Controller
         if (! $comment->author &&
             \WP_REST_Server::CREATABLE === $request->get_method() &&
             $this->rest_base === substr($request->get_route(), -8)) {
-            $comment_cookie_lifetime = apply_filters('comment_cookie_lifetime', 30000);
-            $format = '%s=%s; Path=/; Max-Age=' . $comment_cookie_lifetime . ';';
+            $commentCookieLifetime = apply_filters('comment_cookie_lifetime', 30000);
+            $format = '%s=%s; Path=/; Max-Age=' . $commentCookieLifetime . ';';
 
-            $author_cookie = 'comment_author';
-            $author_value = sprintf(
+            // author, email, and url cookies are simply a convenience for
+            // pre-populating form values
+
+            $authorCookie = sprintf(
                 $format,
-                $author_cookie,
+                'comment_author',
                 $comment->comment_author
             );
-            $response->header('Set-Cookie', $author_value, false);
-            $email_cookie = 'comment_author_email';
-            $email_value = sprintf(
+            $response->header('Set-Cookie', $authorCookie, false);
+
+            $emailCookie = sprintf(
                 $format,
-                $email_cookie,
+                'comment_author_email',
                 $comment->comment_author_email
             );
-            $response->header('Set-Cookie', $email_value, false);
-            $url_cookie = 'comment_author_url';
-            $url_value = sprintf(
+            $response->header('Set-Cookie', $emailCookie, false);
+
+            $urlCookie = sprintf(
                 $format,
-                $url_cookie,
+                'comment_author_url',
                 esc_url($comment->comment_author_url)
             );
-            $response->header('Set-Cookie', $url_value, false);
+            $response->header('Set-Cookie', $urlCookie, false);
+
+            $tokenCookie = sprintf(
+                '%s=%s; Path=/; Max-Age=' . DAY_IN_SECONDS . ';',
+                \GraphQL\getCommentEditTokenKey($comment),
+                \GraphQL\getCommentEditTokenValue($comment)
+            );
+            $response->header('Set-Cookie', $tokenCookie, false);
         }
 
         return $response;
+    }
+
+    // Anonymous users can edit their comments for 24 hours if they have this cookie
+    // @codingStandardsIgnoreLine
+    public function check_edit_permission($comment) {
+        $cookie = \GraphQL\getCommentEditTokenKey($comment);
+        if (empty($_COOKIE[$cookie])) {
+            return false;
+        }
+        $value = \GraphQL\getCommentEditTokenValue($comment);
+        // stripslashes because WordPress
+        return stripslashes($_COOKIE[$cookie]) === $value;
     }
 }
