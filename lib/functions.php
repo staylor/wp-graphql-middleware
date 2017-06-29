@@ -47,7 +47,7 @@ function oembed_dataparse($html, $response, $url) {
 // @codingStandardsIgnoreLine
 function getAuthorHash($comment) {
     // this value is available on the frontend as an opaque ID
-    $graphqlID = base64_encode('Comment', $comment->comment_ID);
+    $graphqlID = base64_encode('Comment:' . $comment->comment_ID);
     return md5($graphqlID . $comment->comment_author_email);
 }
 
