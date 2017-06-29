@@ -62,7 +62,7 @@ class Comments extends \WP_REST_Comments_Controller
 
             $tokenCookie = sprintf(
                 '%s=%s; Path=/; Max-Age=' . DAY_IN_SECONDS . ';',
-                \GraphQL\getCommentEditTokenKey($comment),
+                urlencode(\GraphQL\getCommentEditTokenKey($comment)),
                 \GraphQL\getCommentEditTokenValue($comment)
             );
             $response->header('Set-Cookie', $tokenCookie, false);
