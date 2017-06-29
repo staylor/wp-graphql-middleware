@@ -42,19 +42,23 @@ function oembed_dataparse($html, $response, $url) {
     return getFormattedHTML($data);
 }
 
+// @codingStandardsIgnoreLine
+function toGlobalID($comment) {
+    return base64_encode('Comment:' . $comment->comment_ID);
+}
+
 // this can be used to toggle UI on the front end for owners
 // this value is not sufficient for submission
 // @codingStandardsIgnoreLine
 function getAuthorHash($comment) {
     // this value is available on the frontend as an opaque ID
-    $graphqlID = base64_encode('Comment:' . $comment->comment_ID);
+    $graphqlID = toGlobalID($comment);
     return md5($graphqlID . $comment->comment_author_email);
 }
 
 // @codingStandardsIgnoreLine
 function getCommentEditTokenKey($comment) {
-    // wp_hash() uses internal keys and salts, not spoofable on frontend
-    return 'token_' . wp_hash($comment->comment_ID);
+    return 'token_' . toGlobalID($comment);
 }
 
 // @codingStandardsIgnoreLine
