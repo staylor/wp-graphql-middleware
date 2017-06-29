@@ -11,10 +11,10 @@ class Taxonomies extends \WP_REST_Taxonomies_Controller
 
     // @codingStandardsIgnoreLine
     public function prepare_item_for_response( $taxonomy, $request ) {
-        $response = parent::prepare_item_for_response( $taxonomy, $request );
+        $response = parent::prepare_item_for_response($taxonomy, $request);
 
-        $response->remove_link( 'collection' );
-        $response->remove_link( 'https://api.w.org/items' );
+        $response->remove_link('collection');
+        $response->remove_link('https://api.w.org/items');
 
         $data = $response->get_data();
 
@@ -27,9 +27,9 @@ class Taxonomies extends \WP_REST_Taxonomies_Controller
             'singular' => $taxonomy->labels->singular_name,
         ];
 
-        unset( $data['rest_base'] );
+        unset($data['rest_base']);
 
-        $response->set_data( $data );
+        $response->set_data($data);
 
         return $response;
     }

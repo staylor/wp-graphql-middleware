@@ -11,10 +11,10 @@ class PostTypes extends \WP_REST_Post_Types_Controller
 
     // @codingStandardsIgnoreLine
     public function prepare_item_for_response($post_type, $request) {
-        $response = parent::prepare_item_for_response( $post_type, $request );
+        $response = parent::prepare_item_for_response($post_type, $request);
 
-        $response->remove_link( 'collection' );
-        $response->remove_link( 'https://api.w.org/items' );
+        $response->remove_link('collection');
+        $response->remove_link('https://api.w.org/items');
 
         $data = $response->get_data();
 
@@ -23,9 +23,9 @@ class PostTypes extends \WP_REST_Post_Types_Controller
             'singular' => $post_type->labels->singular_name,
         ];
 
-        unset( $data['rest_base'] );
+        unset($data['rest_base']);
 
-        $response->set_data( $data );
+        $response->set_data($data);
 
         return $response;
     }
