@@ -10,7 +10,8 @@ class HTML {
   public function __construct($html) {
       ini_set('html_errors', 0);
       $doc = new HTML5();
-      $this->dom = $doc->loadHTMLFragment($html);
+      $trimmed = trim($html);
+      $this->dom = $doc->loadHTMLFragment($trimmed);
       $this->walkNode($this->data, $this->dom);
   }
 
@@ -37,7 +38,11 @@ class HTML {
                   $this->walkNode($parsed['children'], $node);
               }
           } elseif ($node instanceof \DOMText) {
-              $parsed['text'] = $node->wholeText;
+              $trimmed = trim($node->wholeText);
+              if (empty($trimmed)) {
+                  continue;
+              }
+              $parsed['text'] = $trimmed;
           }
           $data[] = $parsed;
       }
