@@ -21,5 +21,8 @@
       "GraphQL\\": "lib"
     },
     "files": ["lib/functions.php", "lib/rest-api.php"]
+  },
+  "require": {
+    "masterminds/html5": "^2.2"
   }
 }

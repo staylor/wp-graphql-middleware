@@ -1,6 +1,8 @@
 <?php
 namespace GraphQL\REST\Controller;
 
+use GraphQL\Parser\HTML;
+
 class Posts extends \WP_REST_Posts_Controller
 {
     // @codingStandardsIgnoreLine
@@ -20,6 +22,13 @@ class Posts extends \WP_REST_Posts_Controller
     public function prepare_item_for_response( $post, $request ) {
         $response = parent::prepare_item_for_response($post, $request);
 
+        $response->remove_link('self');
+        $response->remove_link('collection');
+        $response->remove_link('about');
+        $response->remove_link('author');
+        $response->remove_link('replies');
+        $response->remove_link('version-history');
+
         $data = $response->get_data();
 
         if ('view' === $request['context']) {
@@ -27,6 +36,9 @@ class Posts extends \WP_REST_Posts_Controller
             $data['excerpt']['raw'] = empty($post->post_excerpt) ?
                 $this->decode_text($data['excerpt']['rendered']) :
                 $post->post_excerpt;
+
+            $nodes = new HTML($data['content']['rendered']);
+            $data['content']['data'] = $nodes->getData();
         }
 
         $response->set_data($data);

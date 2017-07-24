@@ -12,6 +12,10 @@ class ComposerStaticInitf93ac56410d85c9b773f15dec94b8e50
     );
 
     public static $prefixLengthsPsr4 = array (
+        'M' => 
+        array (
+            'Masterminds\\' => 12,
+        ),
         'G' => 
         array (
             'GraphQL\\' => 8,
@@ -19,6 +23,10 @@ class ComposerStaticInitf93ac56410d85c9b773f15dec94b8e50
     );
 
     public static $prefixDirsPsr4 = array (
+        'Masterminds\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
         'GraphQL\\' => 
         array (
             0 => __DIR__ . '/../..' . '/lib',
@@ -27,6 +35,7 @@ class ComposerStaticInitf93ac56410d85c9b773f15dec94b8e50
 
     public static $classMap = array (
         'GraphQL\\Commands\\OEmbed' => __DIR__ . '/../..' . '/lib/Commands/OEmbed.php',
+        'GraphQL\\Parser\\HTML' => __DIR__ . '/../..' . '/lib/Parser/HTML.php',
         'GraphQL\\REST\\Controller\\Comments' => __DIR__ . '/../..' . '/lib/REST/Controller/Comments.php',
         'GraphQL\\REST\\Controller\\NavMenus' => __DIR__ . '/../..' . '/lib/REST/Controller/NavMenus.php',
         'GraphQL\\REST\\Controller\\PostTypes' => __DIR__ . '/../..' . '/lib/REST/Controller/PostTypes.php',
@@ -34,6 +43,26 @@ class ComposerStaticInitf93ac56410d85c9b773f15dec94b8e50
         'GraphQL\\REST\\Controller\\Settings' => __DIR__ . '/../..' . '/lib/REST/Controller/Settings.php',
         'GraphQL\\REST\\Controller\\Sidebars' => __DIR__ . '/../..' . '/lib/REST/Controller/Sidebars.php',
         'GraphQL\\REST\\Controller\\Taxonomies' => __DIR__ . '/../..' . '/lib/REST/Controller/Taxonomies.php',
+        'Masterminds\\HTML5' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5.php',
+        'Masterminds\\HTML5\\Elements' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Elements.php',
+        'Masterminds\\HTML5\\Entities' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Entities.php',
+        'Masterminds\\HTML5\\Exception' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Exception.php',
+        'Masterminds\\HTML5\\InstructionProcessor' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/InstructionProcessor.php',
+        'Masterminds\\HTML5\\Parser\\CharacterReference' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/CharacterReference.php',
+        'Masterminds\\HTML5\\Parser\\DOMTreeBuilder' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/DOMTreeBuilder.php',
+        'Masterminds\\HTML5\\Parser\\EventHandler' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/EventHandler.php',
+        'Masterminds\\HTML5\\Parser\\FileInputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/FileInputStream.php',
+        'Masterminds\\HTML5\\Parser\\InputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/InputStream.php',
+        'Masterminds\\HTML5\\Parser\\ParseError' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/ParseError.php',
+        'Masterminds\\HTML5\\Parser\\Scanner' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/Scanner.php',
+        'Masterminds\\HTML5\\Parser\\StringInputStream' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/StringInputStream.php',
+        'Masterminds\\HTML5\\Parser\\Tokenizer' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/Tokenizer.php',
+        'Masterminds\\HTML5\\Parser\\TreeBuildingRules' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/TreeBuildingRules.php',
+        'Masterminds\\HTML5\\Parser\\UTF8Utils' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Parser/UTF8Utils.php',
+        'Masterminds\\HTML5\\Serializer\\HTML5Entities' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/HTML5Entities.php',
+        'Masterminds\\HTML5\\Serializer\\OutputRules' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/OutputRules.php',
+        'Masterminds\\HTML5\\Serializer\\RulesInterface' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/RulesInterface.php',
+        'Masterminds\\HTML5\\Serializer\\Traverser' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/Traverser.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
