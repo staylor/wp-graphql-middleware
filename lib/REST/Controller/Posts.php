@@ -37,8 +37,12 @@ class Posts extends \WP_REST_Posts_Controller
                 $this->decode_text($data['excerpt']['rendered']) :
                 $post->post_excerpt;
 
+            $nodes = new HTML($data['title']['rendered']);
+            $data['title']['data'] = $nodes->getData();
             $nodes = new HTML($data['content']['rendered']);
             $data['content']['data'] = $nodes->getData();
+            $nodes = new HTML($data['excerpt']['rendered']);
+            $data['excerpt']['data'] = $nodes->getData();
         }
 
         $response->set_data($data);
