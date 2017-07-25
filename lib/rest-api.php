@@ -23,6 +23,9 @@ function routes() {
 
     $controller = new Controller\Posts('post');
     $controller->register_routes();
+
+    $controller = new Controller\Posts('page');
+    $controller->register_routes();
 }
 
 // @codingStandardsIgnoreLine

@@ -43,6 +43,8 @@ class HTML {
                     continue;
                 }
                 $parsed['text'] = $trimmed;
+            } else {
+                continue;
             }
             $data[] = $parsed;
         }
