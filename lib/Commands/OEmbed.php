@@ -136,7 +136,7 @@ class OEmbed extends \WP_CLI_Command
 
         $data = (array) $this->responses[ $url ];
 
-        $formatted = getFormattedHTML($data);
+        $formatted = \GraphQL\getFormattedHTML($data);
         \WP_CLI::line(
             \WP_CLI::colorize('%RFiltered HTML: %n') . $formatted
         );
@@ -160,7 +160,7 @@ class OEmbed extends \WP_CLI_Command
         );
         $data = (array) $response;
 
-        $formatted = getFormattedHTML($data);
+        $formatted = \GraphQL\getFormattedHTML($data);
         \WP_CLI::line(
             \WP_CLI::colorize('%RFiltered HTML: %n') . $formatted
         );
