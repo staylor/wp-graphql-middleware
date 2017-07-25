@@ -29,13 +29,19 @@ class Posts extends \WP_REST_Posts_Controller
         $response->remove_link('replies');
         $response->remove_link('version-history');
 
-        $data = $response->get_data();
-
         if ('view' === $request['context']) {
-            $data['content']['raw'] = $this->decode_text($data['content']['rendered']);
-            $data['excerpt']['raw'] = empty($post->post_excerpt) ?
-                $this->decode_text($data['excerpt']['rendered']) :
-                $post->post_excerpt;
+            $data = $response->get_data();
+
+            $title = $this->decode_text($data['title']['rendered']);
+            $data['title']['raw'] = trim($title);
+            $content = $this->decode_text($data['content']['rendered']);
+            $data['content']['raw'] = trim($content);
+            if (empty($post->post_excerpt)) {
+              $excerpt = $this->decode_text($data['excerpt']['rendered']);
+              $data['excerpt']['raw'] = trim($excerpt);
+            } else {
+              $data['excerpt']['raw'] = $post->post_excerpt;
+            }
 
             $nodes = new HTML($data['title']['rendered']);
             $data['title']['data'] = $nodes->getData();
@@ -43,9 +49,9 @@ class Posts extends \WP_REST_Posts_Controller
             $data['content']['data'] = $nodes->getData();
             $nodes = new HTML($data['excerpt']['rendered']);
             $data['excerpt']['data'] = $nodes->getData();
-        }
 
-        $response->set_data($data);
+            $response->set_data($data);
+        }
 
         return $response;
     }
