@@ -19,6 +19,46 @@ class HTML {
         return $this->data;
     }
 
+    private function flattenAttributes($attributes) {
+      return array_reduce($attributes, function ($carry, $item) {
+          $carry[$item['name']] = $item['value'];
+          return $carry;
+      }, []);
+    }
+
+    private function findJSON($node) {
+      foreach ($node['children'] as $child) {
+          if ($child['tagName'] !== 'script') {
+              continue;
+          }
+          $flatAttrs = $this->flattenAttributes($child['attributes']);
+          if (empty($flatAttrs['type']) || $flatAttrs['type'] !== 'application/json') {
+              continue;
+          }
+          return array_reduce($child['children'], function ($carry, $item) {
+              $carry .= $item['text'];
+              return $carry;
+          }, '');
+      }
+    }
+
+    private function findEmbed($node) {
+        if (empty($node['attributes']) || $node['tagName'] !== 'figure') {
+            return;
+        }
+        $flatAttrs = $this->flattenAttributes($node['attributes']);
+        $attr = array_search('embed', $flatAttrs);
+        if ($attr !== 'class') {
+            return;
+        }
+        // it is one of our placeholders, just target the JSON
+        $found = $this->findJSON($node);
+        if (!$found) {
+            return;
+        }
+        return json_decode($found, true);
+    }
+
     private function walkNode(&$data, $node) {
         foreach ($node->childNodes as $node) {
             $parsed = [];
@@ -37,11 +77,19 @@ class HTML {
                     $parsed['children'] = [];
                     $this->walkNode($parsed['children'], $node);
                 }
+                $embed = $this->findEmbed($parsed);
+                if ($embed) {
+                    $parsed = $embed;
+                    $parsed['type'] = 'embed';
+                } else {
+                    $parsed['type'] = 'element';
+                }
             } elseif ($node instanceof \DOMText) {
                 $trimmed = trim($node->wholeText);
                 if (empty($trimmed)) {
                     continue;
                 }
+                $parsed['type'] = 'text';
                 $parsed['text'] = $trimmed;
             } else {
                 continue;

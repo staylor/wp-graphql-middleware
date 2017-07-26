@@ -28,6 +28,9 @@ class Posts extends \WP_REST_Posts_Controller
         $response->remove_link('author');
         $response->remove_link('replies');
         $response->remove_link('version-history');
+        $response->remove_link('https://api.w.org/attachment');
+        $response->remove_link('https://api.w.org/term');
+        $response->remove_link('https://api.w.org/featuredmedia');
 
         if ('view' === $request['context']) {
             $data = $response->get_data();
