@@ -43,6 +43,17 @@ class HTML {
       }
     }
 
+    private function findIframe($node) {
+      $nodeCount = count($node['children']);
+      if ($nodeCount > 1 || $nodeCount === 0) {
+          return;
+      }
+      $first = reset( $node['children'] );
+      if ($first['type'] === 'element' && $first['tagName'] === 'iframe') {
+        return $first;
+      }
+    }
+
     private function findEmbed($node) {
         if (empty($node['attributes']) || $node['tagName'] !== 'figure') {
             return;
@@ -78,13 +89,21 @@ class HTML {
                     $parsed['children'] = [];
                     $this->walkNode($parsed['children'], $node);
                 }
+                $parsed['type'] = 'element';
+
                 $embed = $this->findEmbed($parsed);
                 if ($embed) {
                     $parsed = $embed;
                     $parsed['type'] = 'embed';
-                } else {
-                    $parsed['type'] = 'element';
+                    $data[] = $parsed;
+                    continue;
                 }
+
+                $iframe = $this->findIframe($parsed);
+                if ($iframe) {
+                    $parsed = $iframe;
+                }
+                $data[] = $parsed;
             } elseif ($node instanceof \DOMText) {
                 $trimmed = trim($node->wholeText, $this->charMask);
                 if (strlen($trimmed) === 0) {
@@ -92,10 +111,10 @@ class HTML {
                 }
                 $parsed['type'] = 'text';
                 $parsed['text'] = $trimmed;
+                $data[] = $parsed;
             } else {
                 continue;
             }
-            $data[] = $parsed;
         }
     }
 }
