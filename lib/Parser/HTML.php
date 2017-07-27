@@ -90,7 +90,7 @@ class HTML {
                     continue;
                 }
                 $parsed['type'] = 'text';
-                $parsed['text'] = $trimmed;
+                $parsed['text'] = $node->wholeText;
             } else {
                 continue;
             }
