@@ -6,6 +6,7 @@ use Masterminds\HTML5;
 class HTML {
     private $dom;
     private $data = [];
+    private $charMask = "\t\n\r\0\x0B";
 
     public function __construct($html) {
         ini_set('html_errors', 0);
@@ -85,12 +86,12 @@ class HTML {
                     $parsed['type'] = 'element';
                 }
             } elseif ($node instanceof \DOMText) {
-                $trimmed = trim($node->wholeText);
-                if (empty($trimmed)) {
+                $trimmed = trim($node->wholeText, $this->charMask);
+                if (strlen($trimmed) === 0) {
                     continue;
                 }
                 $parsed['type'] = 'text';
-                $parsed['text'] = $node->wholeText;
+                $parsed['text'] = $trimmed;
             } else {
                 continue;
             }
