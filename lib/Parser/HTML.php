@@ -88,21 +88,22 @@ class HTML {
                 if ($node->hasChildNodes()) {
                     $parsed['children'] = [];
                     $this->walkNode($parsed['children'], $node);
+
+                    $embed = $this->findEmbed($parsed);
+                    if ($embed) {
+                        $parsed = $embed;
+                        $parsed['type'] = 'embed';
+                        $data[] = $parsed;
+                        continue;
+                    }
+
+                    $iframe = $this->findIframe($parsed);
+                    if ($iframe) {
+                        $parsed = $iframe;
+                    }
                 }
                 $parsed['type'] = 'element';
 
-                $embed = $this->findEmbed($parsed);
-                if ($embed) {
-                    $parsed = $embed;
-                    $parsed['type'] = 'embed';
-                    $data[] = $parsed;
-                    continue;
-                }
-
-                $iframe = $this->findIframe($parsed);
-                if ($iframe) {
-                    $parsed = $iframe;
-                }
                 $data[] = $parsed;
             } elseif ($node instanceof \DOMText) {
                 $trimmed = trim($node->wholeText, $this->charMask);
@@ -112,8 +113,6 @@ class HTML {
                 $parsed['type'] = 'text';
                 $parsed['text'] = $trimmed;
                 $data[] = $parsed;
-            } else {
-                continue;
             }
         }
     }
