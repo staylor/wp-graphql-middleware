@@ -26,6 +26,9 @@ function routes() {
 
     $controller = new Controller\Posts('page');
     $controller->register_routes();
+
+    $controller = new Controller\Attachments('attachment');
+    $controller->register_routes();
 }
 
 // @codingStandardsIgnoreLine

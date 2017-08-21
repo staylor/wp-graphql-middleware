@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'GraphQL\\Commands\\OEmbed' => $baseDir . '/lib/Commands/OEmbed.php',
     'GraphQL\\Parser\\HTML' => $baseDir . '/lib/Parser/HTML.php',
+    'GraphQL\\REST\\Controller\\Attachments' => $baseDir . '/lib/REST/Controller/Attachments.php',
     'GraphQL\\REST\\Controller\\Comments' => $baseDir . '/lib/REST/Controller/Comments.php',
     'GraphQL\\REST\\Controller\\NavMenus' => $baseDir . '/lib/REST/Controller/NavMenus.php',
     'GraphQL\\REST\\Controller\\PostTypes' => $baseDir . '/lib/REST/Controller/PostTypes.php',

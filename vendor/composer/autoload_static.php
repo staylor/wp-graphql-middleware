@@ -36,6 +36,7 @@ class ComposerStaticInitf93ac56410d85c9b773f15dec94b8e50
     public static $classMap = array (
         'GraphQL\\Commands\\OEmbed' => __DIR__ . '/../..' . '/lib/Commands/OEmbed.php',
         'GraphQL\\Parser\\HTML' => __DIR__ . '/../..' . '/lib/Parser/HTML.php',
+        'GraphQL\\REST\\Controller\\Attachments' => __DIR__ . '/../..' . '/lib/REST/Controller/Attachments.php',
         'GraphQL\\REST\\Controller\\Comments' => __DIR__ . '/../..' . '/lib/REST/Controller/Comments.php',
         'GraphQL\\REST\\Controller\\NavMenus' => __DIR__ . '/../..' . '/lib/REST/Controller/NavMenus.php',
         'GraphQL\\REST\\Controller\\PostTypes' => __DIR__ . '/../..' . '/lib/REST/Controller/PostTypes.php',
